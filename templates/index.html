@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SGHSS - Sistema Hospitalar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>SGHSS - Sistema de Gestão Hospitalar</h1>
+<div id="mensagem"></div>
+<section>
+    <h2>Cadastro de Paciente</h2>
+    <form id="formPaciente">
+        <input type="text" id="nomePaciente" placeholder="Nome" required>
+        <input type="text" id="cpfPaciente" placeholder="CPF" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+</section>
+
+<section>
+    <h2>Cadastro de Médico</h2>
+    <form id="formMedico">
+        <input type="text" id="nomeMedico" placeholder="Nome" required>
+        <input type="text" id="especialidadeMedico" placeholder="Especialidade" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+</section>
+
+<section>
+    <h2>Médicos Cadastrados</h2>
+    <table border="1" width="100%">
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Especialidade</th>
+</tr>
+</thead>
+
+<tbody id="listaMedicos"></tbody>
+
+</table>
+</section>
+
+<section>
+    <h2>Agendamento de Consulta</h2>
+    <form id="formAgendamento">
+        <input type="date" id="dataConsulta" required>
+        <input type="time" id="horario" min="08:00" max="18:00" step="1800" required>
+        <input type="number" id="pacienteId" placeholder="ID do Paciente" required>
+        <select id="medicoId" required>
+    <option value="">Selecione um médico</option>
+</select>
+        <button type="submit">Agendar</button>
+
+    </form>
+</section>
+<section>
+    <h2>Consultas Agendadas</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Data</th>
+                <th>Horário</th>
+            </tr>
+        </thead>
+
+        <tbody id="listaConsultas">
+        </tbody>
+    </table>
+</section>
+<script>
+
+function mostrarMensagem(texto, tipo) {
+    const div = document.getElementById("mensagem");
+
+    div.innerText = texto;
+    div.className = tipo;
+
+    setTimeout(() => {
+        div.innerText = "";
+        div.className = "";
+    }, 4000);
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    carregarMedicos()
+    carregarConsultas()
+
+    // CADASTRO PACIENTE
+    document.getElementById("formPaciente").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const response = await fetch("/cadastrar_paciente", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                nome: document.getElementById("nomePaciente").value,
+                cpf: document.getElementById("cpfPaciente").value
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.mensagem) {
+            mostrarMensagem(data.mensagem, "sucesso");
+        } else {
+            mostrarMensagem(data.erro, "erro");
+        }
+    });
+
+
+    // CADASTRO MEDICO
+    document.getElementById("formMedico").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const response = await fetch("/cadastrar_medico", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                nome: document.getElementById("nomeMedico").value,
+                especialidade: document.getElementById("especialidadeMedico").value
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.mensagem) {
+            mostrarMensagem(data.mensagem, "sucesso");
+            carregarMedicos()
+        } else {
+            mostrarMensagem(data.erro, "erro");
+        }
+    });
+
+
+    // AGENDAR CONSULTA
+    document.getElementById("formAgendamento").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const response = await fetch("/agendar_consulta", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                data: document.getElementById("dataConsulta").value,
+                horario: document.getElementById("horario").value,
+                paciente_id: parseInt(document.getElementById("pacienteId").value),
+                medico_id: parseInt(document.getElementById("medicoId").value)
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.mensagem) {
+            mostrarMensagem(data.mensagem, "sucesso");
+        } else {
+            mostrarMensagem(data.erro, "erro");
+        }
+    });
+
+});
+
+async function carregarMedicos(){
+
+    const response = await fetch("/medicos")
+    const medicos = await response.json()
+
+    const lista = document.getElementById("listaMedicos")
+    const select = document.getElementById("medicoId")
+
+    lista.innerHTML = ""
+    select.innerHTML = '<option value="">Selecione um médico</option>'
+
+    medicos.forEach(medico => {
+
+        const linha = document.createElement("tr")
+
+        linha.innerHTML = `
+            <td>${medico.id}</td>
+            <td>${medico.nome}</td>
+            <td>${medico.especialidade}</td>
+        `
+
+        lista.appendChild(linha)
+
+        const option = document.createElement("option")
+        option.value = medico.id
+        option.text = medico.nome + " - " + medico.especialidade
+
+        select.appendChild(option)
+
+    })
+}
+
+async function carregarConsultas(){
+
+    const response = await fetch("/consultas")
+    const consultas = await response.json()
+
+    const tabela = document.getElementById("listaConsultas")
+
+    tabela.innerHTML = ""
+
+    consultas.forEach(consulta => {
+
+        const linha = document.createElement("tr")
+
+        linha.innerHTML = `
+            <td>${consulta.paciente}</td>
+            <td>${consulta.medico}</td>
+            <td>${consulta.data}</td>
+            <td>${consulta.horario}</td>
+        `
+
+        tabela.appendChild(linha)
+
+    })
+
+}
+
+</script>
+
+</body>
+</html>

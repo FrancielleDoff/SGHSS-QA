@@ -14,15 +14,24 @@ def cadastrar_paciente():
     nome = dados.get("nome")
     cpf = dados.get("cpf")
 
+    # CPF inválido
     if not validar_cpf(cpf):
         return jsonify({"erro": "CPF inválido"}), 400
 
+    # Verifica se CPF já existe
+    paciente_existente = Paciente.query.filter_by(cpf=cpf).first()
+
+    if paciente_existente:
+        return jsonify({"erro": "CPF já cadastrado"}), 400
+
     novo = Paciente(nome=nome, cpf=cpf)
+
     db.session.add(novo)
     db.session.commit()
 
-    return jsonify({"mensagem": "Paciente cadastrado com sucesso"}), 201
-
+    return jsonify({
+        "mensagem": f"Paciente cadastrado com sucesso. Seu ID é {novo.id}"
+    }), 201
 
 
 # Cadastro de Médico
@@ -48,6 +57,7 @@ def agendar_consulta():
     dados = request.get_json()
 
     horario = dados.get("horario")
+    data = dados.get("data")
     paciente_id = dados.get("paciente_id")
     medico_id = dados.get("medico_id")
 
@@ -66,6 +76,7 @@ def agendar_consulta():
         return jsonify({"erro": "Horário indisponível"}), 400
 
     novo_agendamento = Agendamento(
+        data=data,
         horario=horario,
         paciente_id=paciente_id,
         medico_id=medico_id
@@ -75,3 +86,42 @@ def agendar_consulta():
     db.session.commit()
 
     return jsonify({"mensagem": "Consulta agendada com sucesso"}), 201
+
+# Listar médicos (para painel do sistema)
+
+@main.route("/medicos", methods=["GET"])
+def listar_medicos():
+    medicos = Medico.query.all()
+
+    lista_medicos = []
+
+    for medico in medicos:
+        lista_medicos.append({
+            "id": medico.id,
+            "nome": medico.nome,
+            "especialidade": medico.especialidade
+        })
+
+    return jsonify(lista_medicos)
+
+# Lista de consultas agendadas
+@main.route("/consultas", methods=["GET"])
+def listar_consultas():
+
+    consultas = Agendamento.query.all()
+
+    lista = []
+
+    for consulta in consultas:
+
+        paciente = Paciente.query.get(consulta.paciente_id)
+        medico = Medico.query.get(consulta.medico_id)
+
+        lista.append({
+            "paciente": paciente.nome,
+            "medico": medico.nome,
+            "data": consulta.data,
+            "horario": consulta.horario
+        })
+
+    return jsonify(lista)

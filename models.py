@@ -26,7 +26,9 @@ class Agendamento(db.Model):
     __tablename__ = "agendamentos"
 
     id = db.Column(db.Integer, primary_key=True)
-    horario = db.Column(db.String(50), nullable=False)
-#Relaciona paciente e médico atráves de chaves estrangeiras
+
+    data = db.Column(db.String(10))
+    horario = db.Column(db.String(10))
+
     paciente_id = db.Column(db.Integer, db.ForeignKey("pacientes.id"), nullable=False)
     medico_id = db.Column(db.Integer, db.ForeignKey("medicos.id"), nullable=False)

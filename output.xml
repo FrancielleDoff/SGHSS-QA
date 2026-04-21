@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.12.3 on win32)" generated="2026-04-13T13:20:38.312511" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\jmari\PycharmProjects\SGHSS\tests">
+<suite id="s1-s1" name="Test Agendamento" source="C:\Users\jmari\PycharmProjects\SGHSS\tests\test_agendamento.robot">
+<test id="s1-s1-t1" name="Cadastrar Medico Com Sucesso" line="8">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:38.713751" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000'.</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-04-13T13:20:38.713751" elapsed="1.908462"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-04-13T13:20:40.625229" elapsed="0.059594"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:40.691745" level="INFO">Typing text 'Dr João' into text field 'id=nomeMedico'.</msg>
+<arg>id=nomeMedico</arg>
+<arg>Dr João</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:40.691745" elapsed="0.581195"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:41.295141" level="INFO">Typing text 'Cardiologia' into text field 'id=especialidadeMedico'.</msg>
+<arg>id=especialidadeMedico</arg>
+<arg>Cardiologia</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:41.294540" elapsed="0.423716"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:41.723694" level="INFO">Clicking button 'xpath=//button[contains(text(),"Cadastrar")]'.</msg>
+<arg>xpath=//button[contains(text(),"Cadastrar")]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:41.722831" elapsed="0.201618"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-13T13:20:43.925421" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-13T13:20:41.924449" elapsed="2.000972"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:43.961581" level="INFO">Current page contains text 'sucesso'.</msg>
+<arg>sucesso</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-04-13T13:20:43.925930" elapsed="0.035651"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-04-13T13:20:43.962313" elapsed="2.500009"/>
+</kw>
+<status status="PASS" start="2026-04-13T13:20:38.703415" elapsed="7.758907"/>
+</test>
+<status status="PASS" start="2026-04-13T13:20:38.390492" elapsed="8.071830"/>
+</suite>
+<suite id="s1-s2" name="Test Medico" source="C:\Users\jmari\PycharmProjects\SGHSS\tests\test_medico.robot">
+<test id="s1-s2-t1" name="Cadastrar Medico Com Sucesso" line="8">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:46.471851" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000'.</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-04-13T13:20:46.471851" elapsed="1.644726"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-04-13T13:20:48.118587" elapsed="0.052103"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:48.170690" level="INFO">Typing text 'Dr João' into text field 'id=nomeMedico'.</msg>
+<arg>id=nomeMedico</arg>
+<arg>Dr João</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:48.170690" elapsed="0.355746"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:48.526436" level="INFO">Typing text 'Cardiologia' into text field 'id=especialidadeMedico'.</msg>
+<arg>id=especialidadeMedico</arg>
+<arg>Cardiologia</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:48.526436" elapsed="0.187466"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:48.716103" level="INFO">Clicking button 'Cadastrar'.</msg>
+<arg>Cadastrar</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:48.716103" elapsed="0.190372"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:48.936800" level="INFO">Current page contains text 'sucesso'.</msg>
+<arg>sucesso</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-04-13T13:20:48.907117" elapsed="0.029683"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-13T13:20:50.938793" level="INFO">Slept 2 seconds.</msg>
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-13T13:20:48.936800" elapsed="2.002957"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-04-13T13:20:50.940310" elapsed="2.352766"/>
+</kw>
+<status status="PASS" start="2026-04-13T13:20:46.471851" elapsed="6.821225"/>
+</test>
+<status status="PASS" start="2026-04-13T13:20:46.467426" elapsed="6.827971"/>
+</suite>
+<suite id="s1-s3" name="Test Paciente" source="C:\Users\jmari\PycharmProjects\SGHSS\tests\test_paciente.robot">
+<test id="s1-s3-t1" name="Cadastrar Paciente Com Sucesso" line="8">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:53.303372" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5000'.</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-04-13T13:20:53.297701" elapsed="1.356297"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-04-13T13:20:54.661175" elapsed="0.070224"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:54.732361" level="INFO">Typing text 'Maria' into text field 'id=nomePaciente'.</msg>
+<arg>id=nomePaciente</arg>
+<arg>Maria</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:54.731399" elapsed="0.247471"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:54.978870" level="INFO">Typing text '12345678901' into text field 'id=cpfPaciente'.</msg>
+<arg>id=cpfPaciente</arg>
+<arg>12345678901</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:54.978870" elapsed="0.240342"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:55.221426" level="INFO">Clicking button 'xpath=//button[contains(text(),"Cadastrar")]'.</msg>
+<arg>xpath=//button[contains(text(),"Cadastrar")]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-04-13T13:20:55.219212" elapsed="0.151237"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-13T13:20:57.370864" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-13T13:20:55.370449" elapsed="2.000415"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-04-13T13:20:57.413723" level="INFO">Current page contains text 'sucesso'.</msg>
+<arg>sucesso</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-04-13T13:20:57.370864" elapsed="0.042859"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-04-13T13:20:57.416814" elapsed="2.360148"/>
+</kw>
+<status status="PASS" start="2026-04-13T13:20:53.297701" elapsed="6.480112"/>
+</test>
+<status status="PASS" start="2026-04-13T13:20:53.295397" elapsed="6.483633"/>
+</suite>
+<suite id="s1-s4" name="Teste Navegador" source="C:\Users\jmari\PycharmProjects\SGHSS\tests\teste_navegador.robot">
+<test id="s1-s4-t1" line="5">
+<status status="FAIL" start="2026-04-13T13:20:59.781934" elapsed="0.002769">Test name cannot be empty.</status>
+</test>
+<status status="FAIL" start="2026-04-13T13:20:59.781038" elapsed="0.005281"/>
+</suite>
+<status status="FAIL" start="2026-04-13T13:20:38.312511" elapsed="21.475641"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="3" fail="1" skip="0">Tests</stat>
+<stat name="Test Agendamento" id="s1-s1" pass="1" fail="0" skip="0">Tests.Test Agendamento</stat>
+<stat name="Test Medico" id="s1-s2" pass="1" fail="0" skip="0">Tests.Test Medico</stat>
+<stat name="Test Paciente" id="s1-s3" pass="1" fail="0" skip="0">Tests.Test Paciente</stat>
+<stat name="Teste Navegador" id="s1-s4" pass="0" fail="1" skip="0">Tests.Teste Navegador</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-04-13T13:20:38.290725" level="ERROR">Error in file 'C:\Users\jmari\PycharmProjects\SGHSS\tests\teste_navegador.robot' on line 2: Non-existing setting 'Library SeleniumLibrary'.</msg>
+</errors>
+</robot>
