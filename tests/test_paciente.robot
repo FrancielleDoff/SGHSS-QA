@@ -9,8 +9,8 @@ Cadastrar Paciente Com Sucesso
     Open Browser    ${URL}    chrome
     Maximize Browser Window
 
-    Input Text    id=nomePaciente    Maria
-    Input Text    id=cpfPaciente    12345678901
+    Input Text    id=nomePaciente    Neuza
+    Input Text    id=cpfPaciente    87077677955
     Click Button    xpath=//button[contains(text(),"Cadastrar")]
 
     Sleep    2s
